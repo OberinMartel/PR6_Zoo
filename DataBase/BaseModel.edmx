@@ -1,0 +1,750 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Zoo_PracticeModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AdditionalInformation">
+          <Key>
+            <PropertyRef Name="AddRecordingId" />
+          </Key>
+          <Property Name="AddRecordingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PetId" Type="int" Nullable="false" />
+          <Property Name="InformationTypeId" Type="int" Nullable="false" />
+          <Property Name="RecordingId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Diets">
+          <Key>
+            <PropertyRef Name="DietId" />
+          </Key>
+          <Property Name="DietId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PetId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="DietTypeId" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="DietTypes">
+          <Key>
+            <PropertyRef Name="DietTypeId" />
+          </Key>
+          <Property Name="DietTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Post" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Birthdate" Type="datetime" Nullable="false" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FamilyStatus" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FamilyMemberId" Type="int" />
+        </EntityType>
+        <EntityType Name="Habitats">
+          <Key>
+            <PropertyRef Name="HabitatId" />
+          </Key>
+          <Property Name="HabitatId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InformationBirds">
+          <Key>
+            <PropertyRef Name="RecordingId" />
+          </Key>
+          <Property Name="RecordingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DepartureDate" Type="datetime" Nullable="false" />
+          <Property Name="ArrivalDate" Type="datetime" Nullable="false" />
+          <Property Name="CountryId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InformationReptiles">
+          <Key>
+            <PropertyRef Name="RecordingId" />
+          </Key>
+          <Property Name="RecordingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HibernationPeriod" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="NormalTemperature" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="InformationTypes">
+          <Key>
+            <PropertyRef Name="InformationTypeId" />
+          </Key>
+          <Property Name="InformationTypeId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Pets">
+          <Key>
+            <PropertyRef Name="PetId" />
+          </Key>
+          <Property Name="PetId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Birthdate" Type="datetime" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="HabitatId" Type="int" Nullable="false" />
+          <Property Name="KeeperId" Type="int" Nullable="false" />
+          <Property Name="VeterinarianId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_AdditionalInformation_InformationBirds">
+          <End Role="InformationBirds" Type="Self.InformationBirds" Multiplicity="1" />
+          <End Role="AdditionalInformation" Type="Self.AdditionalInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InformationBirds">
+              <PropertyRef Name="RecordingId" />
+            </Principal>
+            <Dependent Role="AdditionalInformation">
+              <PropertyRef Name="RecordingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdditionalInformation_InformationReptiles">
+          <End Role="InformationReptiles" Type="Self.InformationReptiles" Multiplicity="1" />
+          <End Role="AdditionalInformation" Type="Self.AdditionalInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InformationReptiles">
+              <PropertyRef Name="RecordingId" />
+            </Principal>
+            <Dependent Role="AdditionalInformation">
+              <PropertyRef Name="RecordingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdditionalInformation_InformationTypes">
+          <End Role="InformationTypes" Type="Self.InformationTypes" Multiplicity="1" />
+          <End Role="AdditionalInformation" Type="Self.AdditionalInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InformationTypes">
+              <PropertyRef Name="InformationTypeId" />
+            </Principal>
+            <Dependent Role="AdditionalInformation">
+              <PropertyRef Name="InformationTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdditionalInformation_Pets">
+          <End Role="Pets" Type="Self.Pets" Multiplicity="1" />
+          <End Role="AdditionalInformation" Type="Self.AdditionalInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="PetId" />
+            </Principal>
+            <Dependent Role="AdditionalInformation">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Diets_DietTypes">
+          <End Role="DietTypes" Type="Self.DietTypes" Multiplicity="1" />
+          <End Role="Diets" Type="Self.Diets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DietTypes">
+              <PropertyRef Name="DietTypeId" />
+            </Principal>
+            <Dependent Role="Diets">
+              <PropertyRef Name="DietTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Diets_Pets">
+          <End Role="Pets" Type="Self.Pets" Multiplicity="1" />
+          <End Role="Diets" Type="Self.Diets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="PetId" />
+            </Principal>
+            <Dependent Role="Diets">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="Employees1" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Employees1">
+              <PropertyRef Name="FamilyMemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InformationBirds_Countries">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
+          <End Role="InformationBirds" Type="Self.InformationBirds" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="InformationBirds">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pets_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Pets" Type="Self.Pets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Pets">
+              <PropertyRef Name="KeeperId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pets_Employees1">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Pets" Type="Self.Pets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Pets">
+              <PropertyRef Name="VeterinarianId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pets_Habitats">
+          <End Role="Habitats" Type="Self.Habitats" Multiplicity="1" />
+          <End Role="Pets" Type="Self.Pets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Habitats">
+              <PropertyRef Name="HabitatId" />
+            </Principal>
+            <Dependent Role="Pets">
+              <PropertyRef Name="HabitatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище Zoo_PracticeModelContainer">
+          <EntitySet Name="AdditionalInformation" EntityType="Self.AdditionalInformation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Countries" EntityType="Self.Countries" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Diets" EntityType="Self.Diets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DietTypes" EntityType="Self.DietTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Habitats" EntityType="Self.Habitats" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InformationBirds" EntityType="Self.InformationBirds" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InformationReptiles" EntityType="Self.InformationReptiles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InformationTypes" EntityType="Self.InformationTypes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Pets" EntityType="Self.Pets" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_AdditionalInformation_InformationBirds" Association="Self.FK_AdditionalInformation_InformationBirds">
+            <End Role="InformationBirds" EntitySet="InformationBirds" />
+            <End Role="AdditionalInformation" EntitySet="AdditionalInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdditionalInformation_InformationReptiles" Association="Self.FK_AdditionalInformation_InformationReptiles">
+            <End Role="InformationReptiles" EntitySet="InformationReptiles" />
+            <End Role="AdditionalInformation" EntitySet="AdditionalInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdditionalInformation_InformationTypes" Association="Self.FK_AdditionalInformation_InformationTypes">
+            <End Role="InformationTypes" EntitySet="InformationTypes" />
+            <End Role="AdditionalInformation" EntitySet="AdditionalInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdditionalInformation_Pets" Association="Self.FK_AdditionalInformation_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="AdditionalInformation" EntitySet="AdditionalInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Diets_DietTypes" Association="Self.FK_Diets_DietTypes">
+            <End Role="DietTypes" EntitySet="DietTypes" />
+            <End Role="Diets" EntitySet="Diets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Diets_Pets" Association="Self.FK_Diets_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="Diets" EntitySet="Diets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_Employees" Association="Self.FK_Employees_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Employees1" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InformationBirds_Countries" Association="Self.FK_InformationBirds_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="InformationBirds" EntitySet="InformationBirds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pets_Employees" Association="Self.FK_Pets_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Pets" EntitySet="Pets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pets_Employees1" Association="Self.FK_Pets_Employees1">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Pets" EntitySet="Pets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pets_Habitats" Association="Self.FK_Pets_Habitats">
+            <End Role="Habitats" EntitySet="Habitats" />
+            <End Role="Pets" EntitySet="Pets" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Zoo_PracticeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AdditionalInformation">
+          <Key>
+            <PropertyRef Name="AddRecordingId" />
+          </Key>
+          <Property Name="AddRecordingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PetId" Type="Int32" Nullable="false" />
+          <Property Name="InformationTypeId" Type="Int32" Nullable="false" />
+          <Property Name="RecordingId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="InformationBirds" Relationship="Self.FK_AdditionalInformation_InformationBirds" FromRole="AdditionalInformation" ToRole="InformationBirds" />
+          <NavigationProperty Name="InformationReptiles" Relationship="Self.FK_AdditionalInformation_InformationReptiles" FromRole="AdditionalInformation" ToRole="InformationReptiles" />
+          <NavigationProperty Name="InformationTypes" Relationship="Self.FK_AdditionalInformation_InformationTypes" FromRole="AdditionalInformation" ToRole="InformationTypes" />
+          <NavigationProperty Name="Pets" Relationship="Self.FK_AdditionalInformation_Pets" FromRole="AdditionalInformation" ToRole="Pets" />
+        </EntityType>
+        <EntityType Name="Countries">
+          <Key>
+            <PropertyRef Name="CountryId" />
+          </Key>
+          <Property Name="CountryId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="InformationBirds" Relationship="Self.FK_InformationBirds_Countries" FromRole="Countries" ToRole="InformationBirds" />
+        </EntityType>
+        <EntityType Name="Diets">
+          <Key>
+            <PropertyRef Name="DietId" />
+          </Key>
+          <Property Name="DietId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PetId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DietTypeId" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="DietTypes" Relationship="Self.FK_Diets_DietTypes" FromRole="Diets" ToRole="DietTypes" />
+          <NavigationProperty Name="Pets" Relationship="Self.FK_Diets_Pets" FromRole="Diets" ToRole="Pets" />
+        </EntityType>
+        <EntityType Name="DietTypes">
+          <Key>
+            <PropertyRef Name="DietTypeId" />
+          </Key>
+          <Property Name="DietTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Diets" Relationship="Self.FK_Diets_DietTypes" FromRole="DietTypes" ToRole="Diets" />
+        </EntityType>
+        <EntityType Name="Employees">
+          <Key>
+            <PropertyRef Name="EmployeeId" />
+          </Key>
+          <Property Name="EmployeeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Post" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FullName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Birthdate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Phone" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FamilyStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FamilyMemberId" Type="Int32" />
+          <NavigationProperty Name="Employees1" Relationship="Self.FK_Employees_Employees" FromRole="Employees" ToRole="Employees1" />
+          <NavigationProperty Name="Employees2" Relationship="Self.FK_Employees_Employees" FromRole="Employees1" ToRole="Employees" />
+          <NavigationProperty Name="Pets" Relationship="Self.FK_Pets_Employees" FromRole="Employees" ToRole="Pets" />
+          <NavigationProperty Name="Pets1" Relationship="Self.FK_Pets_Employees1" FromRole="Employees" ToRole="Pets" />
+        </EntityType>
+        <EntityType Name="Habitats">
+          <Key>
+            <PropertyRef Name="HabitatId" />
+          </Key>
+          <Property Name="HabitatId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Pets" Relationship="Self.FK_Pets_Habitats" FromRole="Habitats" ToRole="Pets" />
+        </EntityType>
+        <EntityType Name="InformationBirds">
+          <Key>
+            <PropertyRef Name="RecordingId" />
+          </Key>
+          <Property Name="RecordingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DepartureDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ArrivalDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CountryId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AdditionalInformation" Relationship="Self.FK_AdditionalInformation_InformationBirds" FromRole="InformationBirds" ToRole="AdditionalInformation" />
+          <NavigationProperty Name="Countries" Relationship="Self.FK_InformationBirds_Countries" FromRole="InformationBirds" ToRole="Countries" />
+        </EntityType>
+        <EntityType Name="InformationReptiles">
+          <Key>
+            <PropertyRef Name="RecordingId" />
+          </Key>
+          <Property Name="RecordingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HibernationPeriod" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="NormalTemperature" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AdditionalInformation" Relationship="Self.FK_AdditionalInformation_InformationReptiles" FromRole="InformationReptiles" ToRole="AdditionalInformation" />
+        </EntityType>
+        <EntityType Name="InformationTypes">
+          <Key>
+            <PropertyRef Name="InformationTypeId" />
+          </Key>
+          <Property Name="InformationTypeId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="AdditionalInformation" Relationship="Self.FK_AdditionalInformation_InformationTypes" FromRole="InformationTypes" ToRole="AdditionalInformation" />
+        </EntityType>
+        <EntityType Name="Pets">
+          <Key>
+            <PropertyRef Name="PetId" />
+          </Key>
+          <Property Name="PetId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Birthdate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="HabitatId" Type="Int32" Nullable="false" />
+          <Property Name="KeeperId" Type="Int32" Nullable="false" />
+          <Property Name="VeterinarianId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="AdditionalInformation" Relationship="Self.FK_AdditionalInformation_Pets" FromRole="Pets" ToRole="AdditionalInformation" />
+          <NavigationProperty Name="Diets" Relationship="Self.FK_Diets_Pets" FromRole="Pets" ToRole="Diets" />
+          <NavigationProperty Name="Employees" Relationship="Self.FK_Pets_Employees" FromRole="Pets" ToRole="Employees" />
+          <NavigationProperty Name="Employees1" Relationship="Self.FK_Pets_Employees1" FromRole="Pets" ToRole="Employees" />
+          <NavigationProperty Name="Habitats" Relationship="Self.FK_Pets_Habitats" FromRole="Pets" ToRole="Habitats" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_AdditionalInformation_InformationBirds">
+          <End Role="InformationBirds" Type="Self.InformationBirds" Multiplicity="1" />
+          <End Role="AdditionalInformation" Type="Self.AdditionalInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InformationBirds">
+              <PropertyRef Name="RecordingId" />
+            </Principal>
+            <Dependent Role="AdditionalInformation">
+              <PropertyRef Name="RecordingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdditionalInformation_InformationReptiles">
+          <End Role="InformationReptiles" Type="Self.InformationReptiles" Multiplicity="1" />
+          <End Role="AdditionalInformation" Type="Self.AdditionalInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InformationReptiles">
+              <PropertyRef Name="RecordingId" />
+            </Principal>
+            <Dependent Role="AdditionalInformation">
+              <PropertyRef Name="RecordingId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdditionalInformation_InformationTypes">
+          <End Role="InformationTypes" Type="Self.InformationTypes" Multiplicity="1" />
+          <End Role="AdditionalInformation" Type="Self.AdditionalInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="InformationTypes">
+              <PropertyRef Name="InformationTypeId" />
+            </Principal>
+            <Dependent Role="AdditionalInformation">
+              <PropertyRef Name="InformationTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_AdditionalInformation_Pets">
+          <End Role="Pets" Type="Self.Pets" Multiplicity="1" />
+          <End Role="AdditionalInformation" Type="Self.AdditionalInformation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="PetId" />
+            </Principal>
+            <Dependent Role="AdditionalInformation">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_InformationBirds_Countries">
+          <End Role="Countries" Type="Self.Countries" Multiplicity="1" />
+          <End Role="InformationBirds" Type="Self.InformationBirds" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Countries">
+              <PropertyRef Name="CountryId" />
+            </Principal>
+            <Dependent Role="InformationBirds">
+              <PropertyRef Name="CountryId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Diets_DietTypes">
+          <End Role="DietTypes" Type="Self.DietTypes" Multiplicity="1" />
+          <End Role="Diets" Type="Self.Diets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DietTypes">
+              <PropertyRef Name="DietTypeId" />
+            </Principal>
+            <Dependent Role="Diets">
+              <PropertyRef Name="DietTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Diets_Pets">
+          <End Role="Pets" Type="Self.Pets" Multiplicity="1" />
+          <End Role="Diets" Type="Self.Diets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Pets">
+              <PropertyRef Name="PetId" />
+            </Principal>
+            <Dependent Role="Diets">
+              <PropertyRef Name="PetId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employees_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="0..1" />
+          <End Role="Employees1" Type="Self.Employees" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Employees1">
+              <PropertyRef Name="FamilyMemberId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pets_Employees">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Pets" Type="Self.Pets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Pets">
+              <PropertyRef Name="KeeperId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pets_Employees1">
+          <End Role="Employees" Type="Self.Employees" Multiplicity="1" />
+          <End Role="Pets" Type="Self.Pets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employees">
+              <PropertyRef Name="EmployeeId" />
+            </Principal>
+            <Dependent Role="Pets">
+              <PropertyRef Name="VeterinarianId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Pets_Habitats">
+          <End Role="Habitats" Type="Self.Habitats" Multiplicity="1" />
+          <End Role="Pets" Type="Self.Pets" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Habitats">
+              <PropertyRef Name="HabitatId" />
+            </Principal>
+            <Dependent Role="Pets">
+              <PropertyRef Name="HabitatId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Zoo_PracticeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AdditionalInformation" EntityType="Self.AdditionalInformation" />
+          <EntitySet Name="Countries" EntityType="Self.Countries" />
+          <EntitySet Name="Diets" EntityType="Self.Diets" />
+          <EntitySet Name="DietTypes" EntityType="Self.DietTypes" />
+          <EntitySet Name="Employees" EntityType="Self.Employees" />
+          <EntitySet Name="Habitats" EntityType="Self.Habitats" />
+          <EntitySet Name="InformationBirds" EntityType="Self.InformationBirds" />
+          <EntitySet Name="InformationReptiles" EntityType="Self.InformationReptiles" />
+          <EntitySet Name="InformationTypes" EntityType="Self.InformationTypes" />
+          <EntitySet Name="Pets" EntityType="Self.Pets" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_AdditionalInformation_InformationBirds" Association="Self.FK_AdditionalInformation_InformationBirds">
+            <End Role="InformationBirds" EntitySet="InformationBirds" />
+            <End Role="AdditionalInformation" EntitySet="AdditionalInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdditionalInformation_InformationReptiles" Association="Self.FK_AdditionalInformation_InformationReptiles">
+            <End Role="InformationReptiles" EntitySet="InformationReptiles" />
+            <End Role="AdditionalInformation" EntitySet="AdditionalInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdditionalInformation_InformationTypes" Association="Self.FK_AdditionalInformation_InformationTypes">
+            <End Role="InformationTypes" EntitySet="InformationTypes" />
+            <End Role="AdditionalInformation" EntitySet="AdditionalInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_AdditionalInformation_Pets" Association="Self.FK_AdditionalInformation_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="AdditionalInformation" EntitySet="AdditionalInformation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_InformationBirds_Countries" Association="Self.FK_InformationBirds_Countries">
+            <End Role="Countries" EntitySet="Countries" />
+            <End Role="InformationBirds" EntitySet="InformationBirds" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Diets_DietTypes" Association="Self.FK_Diets_DietTypes">
+            <End Role="DietTypes" EntitySet="DietTypes" />
+            <End Role="Diets" EntitySet="Diets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Diets_Pets" Association="Self.FK_Diets_Pets">
+            <End Role="Pets" EntitySet="Pets" />
+            <End Role="Diets" EntitySet="Diets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employees_Employees" Association="Self.FK_Employees_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Employees1" EntitySet="Employees" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pets_Employees" Association="Self.FK_Pets_Employees">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Pets" EntitySet="Pets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pets_Employees1" Association="Self.FK_Pets_Employees1">
+            <End Role="Employees" EntitySet="Employees" />
+            <End Role="Pets" EntitySet="Pets" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Pets_Habitats" Association="Self.FK_Pets_Habitats">
+            <End Role="Habitats" EntitySet="Habitats" />
+            <End Role="Pets" EntitySet="Pets" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Zoo_PracticeModelContainer" CdmEntityContainer="Zoo_PracticeEntities">
+          <EntitySetMapping Name="AdditionalInformation">
+            <EntityTypeMapping TypeName="Zoo_PracticeModel.AdditionalInformation">
+              <MappingFragment StoreEntitySet="AdditionalInformation">
+                <ScalarProperty Name="AddRecordingId" ColumnName="AddRecordingId" />
+                <ScalarProperty Name="PetId" ColumnName="PetId" />
+                <ScalarProperty Name="InformationTypeId" ColumnName="InformationTypeId" />
+                <ScalarProperty Name="RecordingId" ColumnName="RecordingId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Countries">
+            <EntityTypeMapping TypeName="Zoo_PracticeModel.Countries">
+              <MappingFragment StoreEntitySet="Countries">
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Diets">
+            <EntityTypeMapping TypeName="Zoo_PracticeModel.Diets">
+              <MappingFragment StoreEntitySet="Diets">
+                <ScalarProperty Name="DietId" ColumnName="DietId" />
+                <ScalarProperty Name="PetId" ColumnName="PetId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="DietTypeId" ColumnName="DietTypeId" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DietTypes">
+            <EntityTypeMapping TypeName="Zoo_PracticeModel.DietTypes">
+              <MappingFragment StoreEntitySet="DietTypes">
+                <ScalarProperty Name="DietTypeId" ColumnName="DietTypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employees">
+            <EntityTypeMapping TypeName="Zoo_PracticeModel.Employees">
+              <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="EmployeeId" ColumnName="EmployeeId" />
+                <ScalarProperty Name="Post" ColumnName="Post" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="FamilyStatus" ColumnName="FamilyStatus" />
+                <ScalarProperty Name="FamilyMemberId" ColumnName="FamilyMemberId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Habitats">
+            <EntityTypeMapping TypeName="Zoo_PracticeModel.Habitats">
+              <MappingFragment StoreEntitySet="Habitats">
+                <ScalarProperty Name="HabitatId" ColumnName="HabitatId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InformationBirds">
+            <EntityTypeMapping TypeName="Zoo_PracticeModel.InformationBirds">
+              <MappingFragment StoreEntitySet="InformationBirds">
+                <ScalarProperty Name="RecordingId" ColumnName="RecordingId" />
+                <ScalarProperty Name="DepartureDate" ColumnName="DepartureDate" />
+                <ScalarProperty Name="ArrivalDate" ColumnName="ArrivalDate" />
+                <ScalarProperty Name="CountryId" ColumnName="CountryId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InformationReptiles">
+            <EntityTypeMapping TypeName="Zoo_PracticeModel.InformationReptiles">
+              <MappingFragment StoreEntitySet="InformationReptiles">
+                <ScalarProperty Name="RecordingId" ColumnName="RecordingId" />
+                <ScalarProperty Name="HibernationPeriod" ColumnName="HibernationPeriod" />
+                <ScalarProperty Name="NormalTemperature" ColumnName="NormalTemperature" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InformationTypes">
+            <EntityTypeMapping TypeName="Zoo_PracticeModel.InformationTypes">
+              <MappingFragment StoreEntitySet="InformationTypes">
+                <ScalarProperty Name="InformationTypeId" ColumnName="InformationTypeId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Pets">
+            <EntityTypeMapping TypeName="Zoo_PracticeModel.Pets">
+              <MappingFragment StoreEntitySet="Pets">
+                <ScalarProperty Name="PetId" ColumnName="PetId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="HabitatId" ColumnName="HabitatId" />
+                <ScalarProperty Name="KeeperId" ColumnName="KeeperId" />
+                <ScalarProperty Name="VeterinarianId" ColumnName="VeterinarianId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Zoo_PracticeModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

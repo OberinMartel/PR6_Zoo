@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c10eaf738d36402bb1659ec688cbb930" Name="Diagram1">
+        <EntityTypeShape EntityType="Zoo_PracticeModel.AdditionalInformation" Width="1.5" PointX="5.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Zoo_PracticeModel.Countries" Width="1.5" PointX="0.75" PointY="9.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Zoo_PracticeModel.Diets" Width="1.5" PointX="8.25" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Zoo_PracticeModel.DietTypes" Width="1.5" PointX="6" PointY="2.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Zoo_PracticeModel.Employees" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Zoo_PracticeModel.Habitats" Width="1.5" PointX="0.75" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Zoo_PracticeModel.InformationBirds" Width="1.5" PointX="3" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Zoo_PracticeModel.InformationReptiles" Width="1.5" PointX="3" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Zoo_PracticeModel.InformationTypes" Width="1.5" PointX="3" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Zoo_PracticeModel.Pets" Width="1.5" PointX="3" PointY="4.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Zoo_PracticeModel.sysdiagrams" Width="1.5" PointX="5.75" PointY="9" IsExpanded="true" />
+        <AssociationConnector Association="Zoo_PracticeModel.FK_AdditionalInformation_InformationBirds" ManuallyRouted="false" />
+        <AssociationConnector Association="Zoo_PracticeModel.FK_AdditionalInformation_InformationReptiles" ManuallyRouted="false" />
+        <AssociationConnector Association="Zoo_PracticeModel.FK_AdditionalInformation_InformationTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Zoo_PracticeModel.FK_AdditionalInformation_Pets" ManuallyRouted="false" />
+        <AssociationConnector Association="Zoo_PracticeModel.FK_InformationBirds_Countries" ManuallyRouted="false" />
+        <AssociationConnector Association="Zoo_PracticeModel.FK_Diets_DietTypes" ManuallyRouted="false" />
+        <AssociationConnector Association="Zoo_PracticeModel.FK_Diets_Pets" ManuallyRouted="false" />
+        <AssociationConnector Association="Zoo_PracticeModel.FK_Employees_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="Zoo_PracticeModel.FK_Pets_Employees" ManuallyRouted="false" />
+        <AssociationConnector Association="Zoo_PracticeModel.FK_Pets_Employees1" ManuallyRouted="false" />
+        <AssociationConnector Association="Zoo_PracticeModel.FK_Pets_Habitats" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

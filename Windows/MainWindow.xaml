@@ -1,0 +1,20 @@
+﻿<Window x:Class="Zoo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Zoo"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="75"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+        </Grid.RowDefinitions>
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" Text="Зоопарк" FontSize="42" ></TextBlock>
+        <Frame ContentRendered="MainFrame_ContentRendered" NavigationUIVisibility="Hidden" Grid.Row="1" Name="MainFrame"></Frame>
+        <Button Grid.Row="2" Content="Вернуться" Name="BtnBack" HorizontalAlignment="Right" Click="BtnBack_Click"></Button>
+        <Button Grid.Row="2" Content="Сотрудники" Name="BtnEmployees" HorizontalAlignment="Left" Click="BtnEmployees_Click"></Button>
+    </Grid>
+</Window>
